@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="card">
+        <h1>Calculadora de IMC</h1>
+
+        <br>
+        <div class="linha">
+            <div class="coluna1">
+                <h3>Informe sua altura:</h3>
+            </div>
+            <div class="coluna2">
+                <input id="altura" type="number" step="0.01" required>
+            </div>
+        </div>
+        <div class="linha">
+            <div class="coluna1">
+                <h3>Informe seu peso:</h3>
+            </div>
+            <div class="coluna2">
+                <input id="peso" type="number" step="0.01" required>
+            </div>
+        </div>
+
+        <div class="button">
+            <button id="calcularButton" onclick="calcularImc()">
+                <h3>Calcular</h3>
+            </button>
+        </div>
+
+        <div id="corIndice">
+            <p id="resultado"></p>
+        </div>
+
+    </div>
+
+    <script>
+
+        var corIndice = document.getElementById('corIndice');
+        var classificacao;
+
+        function calcularImc() {
+            var altura = parseFloat(document.getElementById('altura').value);
+            var peso = parseFloat(document.getElementById('peso').value);
+            var imc = peso / ((altura / 100) ** 2);
+
+            if (imc < 18.5) {
+                classificacao = ' e isso é classificado como baixo peso.';
+                corIndice.style.backgroundColor = '#FFBF00';
+            } else if (imc >= 18.5 && imc < 25) {
+                classificacao = ' e isso é classificado como um peso ideal.';
+                corIndice.style.backgroundColor = '#27E640';
+            } else if (imc >= 25 && imc < 30) {
+                classificacao = ' e isso é classificado como sobrepeso.';
+                corIndice.style.backgroundColor = '#E67727C3';
+            } else if (imc >= 30 && imc < 35) {
+                classificacao = ' e isso é classificado como obesidade grau I.';
+                corIndice.style.backgroundColor = '#910303C3';
+            } else if (imc >= 35 && imc < 40) {
+                classificacao = ' e isso é classificado como obesidade grau II.';
+                corIndice.style.backgroundColor = '#EB0808C3';
+            } else {
+                classificacao = ' e isso é classificado como obesidade grau III.';
+                corIndice.style.backgroundColor = '#FF0000C3';
+            }
+
+            imc = imc.toFixed(2)
+
+            document.getElementById('resultado').innerText = 'Seu IMC é: ' + imc + classificacao;
+        }
+
+    </script>
+</body>
+
+</html>
